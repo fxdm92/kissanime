@@ -1,1 +1,2 @@
-This file was created by IntelliJ IDEA 12.1.6 for binding GitHub repository
+This project is to get download links from kissanime without using kpoints (which are super slow to get). 
+Average 100 links/minutes. Suggest using IDM to add them in batches. 
