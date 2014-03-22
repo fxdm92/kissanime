@@ -2,9 +2,11 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.support.ui.ExpectedCondition;
-import org.openqa.selenium.support.ui.WebDriverWait;
+import org.openqa.selenium.firefox.FirefoxProfile;
 
+import java.awt.*;
+import java.awt.datatransfer.Clipboard;
+import java.awt.datatransfer.StringSelection;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -21,7 +23,11 @@ public class main {
         Scanner scanner = new Scanner(System.in);
         String access_link = scanner.next().trim();
 
-        WebDriver driver = new FirefoxDriver();
+        FirefoxProfile profile = new FirefoxProfile();
+        profile.setPreference("permissions.default.stylesheet", 2);
+        profile.setPreference("permissions.default.image", 2);
+
+        WebDriver driver = new FirefoxDriver(profile);
 
         driver.get(access_link);
         List<WebElement> elements = driver.findElement(By.className("listing")).findElements(By.tagName("tr"));
@@ -41,6 +47,7 @@ public class main {
         System.out.println(links.size());
 
         int size = links.size();
+        String allLinks = new String();
 
         for (int ind = size-1; ind >=0; ind --) {
             String link = new String(links.get(ind));
@@ -52,11 +59,18 @@ public class main {
                     WebElement element = driver.findElement(By.id("divDownload")).findElement(By.tagName("a"));
                     String t = element.getAttribute("href");
                     System.out.println(t);
+                    allLinks = allLinks + " " + t;
                 } catch (Exception error) {
                     flag = true;
                 }
             }
         }
+
+        // Copy the link to clipboard
+        Toolkit toolkit = Toolkit.getDefaultToolkit();
+        Clipboard clipboard = toolkit.getSystemClipboard();
+        StringSelection strSel = new StringSelection(allLinks);
+        clipboard.setContents(strSel, null);
 
         //Close the browser
         driver.quit();
