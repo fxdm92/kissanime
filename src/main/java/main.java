@@ -7,17 +7,23 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Queue;
+import java.util.Scanner;
 
 public class main {
     public static void main(String[] args) {
         // Create a new instance of the Firefox driver
         // Notice that the remainder of the code relies on the interface,
         // not the implementation.
-        WebDriver driver = new FirefoxDriver();
+
         //int t = 100;
 
-        driver.get("http://kissanime.com/Anime/Samurai-Champloo-Sub");
+        System.out.println("Enter link: ");
+        Scanner scanner = new Scanner(System.in);
+        String access_link = scanner.next().trim();
+
+        WebDriver driver = new FirefoxDriver();
+
+        driver.get(access_link);
         List<WebElement> elements = driver.findElement(By.className("listing")).findElements(By.tagName("tr"));
 
         int index = 0;
