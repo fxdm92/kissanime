@@ -17,15 +17,21 @@ public class main {
         // Notice that the remainder of the code relies on the interface,
         // not the implementation.
 
-        //int t = 100;
+        int LINK_LIMITATION = 1000;
+
+
+        Scanner scanner = new Scanner(System.in);
 
         System.out.println("Enter link: ");
-        Scanner scanner = new Scanner(System.in);
         String access_link = scanner.next().trim();
+        System.out.println("Enter limit: ");
+        String link_limitation = scanner.nextLine().trim();
+        if (!link_limitation.equals("")) LINK_LIMITATION = Integer.valueOf(link_limitation);
 
         FirefoxProfile profile = new FirefoxProfile();
         profile.setPreference("permissions.default.stylesheet", 2);
         profile.setPreference("permissions.default.image", 2);
+        profile.setPreference("dom.ipc.plugins.enabled.libflashplayer.so", "false");
 
         WebDriver driver = new FirefoxDriver(profile);
 
@@ -49,7 +55,7 @@ public class main {
         int size = links.size();
         String allLinks = new String();
 
-        for (int ind = size-1; ind >=0; ind --) {
+        for (int ind = size-1; ind >=Math.max(0, size - LINK_LIMITATION); ind --) {
             String link = new String(links.get(ind));
             boolean flag = true;
             while (flag) {
@@ -66,7 +72,7 @@ public class main {
             }
         }
 
-        // Copy the link to clipboard
+        // Copy the links to clipboard
         Toolkit toolkit = Toolkit.getDefaultToolkit();
         Clipboard clipboard = toolkit.getSystemClipboard();
         StringSelection strSel = new StringSelection(allLinks);
