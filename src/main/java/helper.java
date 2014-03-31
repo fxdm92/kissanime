@@ -17,7 +17,7 @@ public class Helper {
 
     public Helper(){
         try {
-            process = Runtime.getRuntime ().exec ("src/main/resources/ai/pbrain-pela.exe");
+            process = Runtime.getRuntime ().exec ("src/main/resources/ai/pbrain-RenjuSolver.exe");
             stdin = process.getOutputStream ();
             stderr = process.getErrorStream ();
             stdout = process.getInputStream ();
