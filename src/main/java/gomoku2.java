@@ -24,7 +24,7 @@ public class gomoku2 {
         // Notice that the remainder of the code relies on the interface,
         // not the implementation.
 
-        int SAFE_ZONE = 240;
+        int SAFE_ZONE = 200;
 
         int[][] a = new int[26][22];
 
@@ -75,13 +75,14 @@ public class gomoku2 {
                 List<WebElement> scores = driver.findElements(By.className("score"));
                 String score2 = scores.get(1).getText().trim().split(" ")[0];
                 Integer intscore;
-                try{
+                try {
                     intscore = Integer.parseInt(score2);
+                    System.out.println("score of opponent:" + intscore);
                     if (intscore < SAFE_ZONE) {
                         System.out.println("Score is under safe zone:" + intscore);
                         break;
                     }
-                } catch (Exception e){
+                } catch (Exception e) {
                     intscore = 0;
                 }
 
@@ -240,6 +241,35 @@ public class gomoku2 {
                 // check if other already finish the move
                 boolean waitingFlag = true;
                 while (waitingFlag) {
+
+                    //check if already win (opponent lost without making any move)
+                    WebElement result = driver.findElement(By.id("result"));
+                    String res = result.getText().trim();
+                    if (!res.equals("")) {
+                        System.out.println("res = " + res);
+                        System.out.println("Opponent lost due to inactivity");
+                        driver.get("http://caro.haivl.com/play");
+                        try {
+                            Thread.sleep(2000);
+                        } catch (InterruptedException ex) {
+                            Thread.currentThread().interrupt();
+                        }
+
+                        WebElement playButton = driver.findElement(By.className("join")).findElement(By.tagName("button"));
+                        Actions action = new Actions(driver);
+                        action.moveToElement(playButton);
+                        action.clickAndHold();
+                        action.release();
+                        action.perform();
+                        try {
+                            Thread.sleep(2000);
+                        } catch (InterruptedException ex) {
+                            Thread.currentThread().interrupt();
+                        }
+                        reload = true;
+                        break;
+                    }
+
                     WebElement time = driver.findElement(By.className("status")).findElement(By.className("time"));
                     String ttime = time.getText().trim();
                     if (!ttime.equals("")) break;
@@ -271,15 +301,6 @@ public class gomoku2 {
                             Thread.currentThread().interrupt();
                         }
                         reload = true;
-                        break;
-                    }
-
-                    WebElement result = driver.findElement(By.id("result"));
-                    String res = result.getText().trim();
-                    if (!res.equals("")) {
-                        WebElement continueButton = driver.findElement(By.className("commands")).findElement(By.tagName("button"));
-                        continueButton.click();
-                        flagloop = false;
                         break;
                     }
                 }
