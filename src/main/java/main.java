@@ -18,7 +18,9 @@ public class main {
         // not the implementation.
 
         int LINK_LIMITATION = 1000;
-
+        String loginLink = "http://kissanime.com/Login";
+        String username = "mrdl2010";
+        String password = "111111";
 
         Scanner scanner = new Scanner(System.in);
 
@@ -34,6 +36,24 @@ public class main {
         profile.setPreference("dom.ipc.plugins.enabled.libflashplayer.so", "false");
 
         WebDriver driver = new FirefoxDriver(profile);
+
+        //Login
+        driver.get(loginLink);
+        WebElement userInput = driver.findElement(By.id("username"));
+        userInput.sendKeys(username);
+        WebElement passwordInput = driver.findElement(By.id("password"));
+        passwordInput.sendKeys(password);
+        WebElement submitButton = driver.findElement(By.id("btnSubmit"));
+        submitButton.click();
+
+        try
+        {
+            Thread.sleep(2000);
+        }
+        catch (Exception ex)
+        {
+
+        }
 
         driver.get(access_link);
         List<WebElement> elements = driver.findElement(By.className("listing")).findElements(By.tagName("tr"));
