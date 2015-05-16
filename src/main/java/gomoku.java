@@ -1,3 +1,4 @@
+/*
 import org.apache.commons.lang3.math.NumberUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -11,6 +12,7 @@ import java.io.*;
 import java.util.List;
 import java.util.Scanner;
 
+*/
 /**
  * Created with IntelliJ IDEA.
  * User: NguyenTranQuan
@@ -18,7 +20,8 @@ import java.util.Scanner;
  * Time: 5:50 PM
  * To change this template use File | Settings | File Templates.
  * The AI will stop when losing the first game to avoid losing a lot of points
- */
+ *//*
+
 public class gomoku {
     public static void main(String[] args) {
         // Create a new instance of the Firefox driver
@@ -85,6 +88,7 @@ public class gomoku {
 
             // first have to check if the opponent already went a move. This might be an unneccessary step since we have to check again later.
             // Will look at it when have free time.
+*/
 /*            while(true){
                 int i = scanner.nextInt();
                 int j = scanner.nextInt();
@@ -100,7 +104,8 @@ public class gomoku {
                 }
                 System.out.println(jsanswer);
                 if (1 ==2) break;
-            }*/
+            }*//*
+
 
             boolean flagfirstmove = false;
 
@@ -262,3 +267,4 @@ public class gomoku {
         }
     }
 }
+*/

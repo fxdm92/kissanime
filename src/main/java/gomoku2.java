@@ -1,3 +1,4 @@
+/*
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -9,6 +10,7 @@ import org.openqa.selenium.interactions.Actions;
 import java.util.List;
 import java.util.Scanner;
 
+*/
 /**
  * Created with IntelliJ IDEA.
  * User: NguyenTranQuan
@@ -17,7 +19,8 @@ import java.util.Scanner;
  * To change this template use File | Settings | File Templates.
  * The AI will stop when losing the first game to avoid losing a lot of points
  * This is a cheated version
- */
+ *//*
+
 public class gomoku2 {
     public static void main(String[] args) {
         // Create a new instance of the Firefox driver
@@ -212,7 +215,8 @@ public class gomoku2 {
                         reload = true;
                     }
                 } else {
-                    /*System.out.println("The opponent is the first to play");
+                    */
+/*System.out.println("The opponent is the first to play");
                     System.out.println("Sleep for 60 sec");
                     try {
                         Thread.sleep(60000);
@@ -227,7 +231,8 @@ public class gomoku2 {
                     action.clickAndHold();
                     action.release();
                     action.perform();
-                    reload = true;*/
+                    reload = true;*//*
+
                 }
             }
 
@@ -386,3 +391,4 @@ public class gomoku2 {
         }
     }
 }
+*/

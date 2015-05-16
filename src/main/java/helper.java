@@ -1,19 +1,22 @@
+/*
 import org.apache.commons.lang3.math.NumberUtils;
 
 import java.io.*;
 
+*/
 /**
  * Created with IntelliJ IDEA.
  * User: NguyenTranQuan
  * Date: 3/30/14
  * Time: 6:17 PM
  * To change this template use File | Settings | File Templates.
- */
+ *//*
+
 public class Helper {
     OutputStream stdin = null;
     InputStream stderr = null;
     InputStream stdout = null;
-    Process process = null;
+    Process process = null;+
 
     public Helper(){
         try {
@@ -57,3 +60,4 @@ public class Helper {
     }
 
 }
+*/

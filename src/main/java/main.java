@@ -18,6 +18,7 @@ public class main {
         // not the implementation.
 
         int LINK_LIMITATION = 1000;
+        int LINK_START = 0;
         String loginLink = "http://kissanime.com/Login";
         String username = "mrdl2010";
         String password = "111111";
@@ -26,9 +27,13 @@ public class main {
 
         System.out.println("Enter link: ");
         String access_link = scanner.next().trim();
+        scanner.nextLine();
         System.out.println("Enter limit: ");
         String link_limitation = scanner.nextLine().trim();
+        System.out.println("Enter start: ");
+        String link_start = scanner.nextLine().trim();
         if (!link_limitation.equals("")) LINK_LIMITATION = Integer.valueOf(link_limitation);
+        if (!link_start.equals("")) LINK_START = Integer.valueOf(link_start);
 
         FirefoxProfile profile = new FirefoxProfile();
         profile.setPreference("permissions.default.stylesheet", 2);
@@ -39,21 +44,16 @@ public class main {
 
         //Login
         driver.get(loginLink);
+
+        sleep(10000);
+
         WebElement userInput = driver.findElement(By.id("username"));
         userInput.sendKeys(username);
         WebElement passwordInput = driver.findElement(By.id("password"));
         passwordInput.sendKeys(password);
         WebElement submitButton = driver.findElement(By.id("btnSubmit"));
         submitButton.click();
-
-        try
-        {
-            Thread.sleep(2000);
-        }
-        catch (Exception ex)
-        {
-
-        }
+        sleep(2000);
 
         driver.get(access_link);
         List<WebElement> elements = driver.findElement(By.className("listing")).findElements(By.tagName("tr"));
@@ -75,7 +75,7 @@ public class main {
         int size = links.size();
         String allLinks = new String();
 
-        for (int ind = size-1; ind >=Math.max(0, size - LINK_LIMITATION); ind --) {
+        for (int ind = size - 1- LINK_START; ind >= Math.max(0, size - LINK_LIMITATION); ind--) {
             String link = new String(links.get(ind));
             boolean flag = true;
             while (flag) {
@@ -100,5 +100,13 @@ public class main {
 
         //Close the browser
         driver.quit();
+    }
+
+    public static void sleep(int t) {
+        try {
+            Thread.sleep(t);
+        } catch (Exception ex) {
+
+        }
     }
 }
