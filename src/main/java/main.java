@@ -45,18 +45,41 @@ public class main {
         //Login
         driver.get(loginLink);
 
-        sleep(10000);
+        boolean loginflag = true;
 
-        WebElement userInput = driver.findElement(By.id("username"));
-        userInput.sendKeys(username);
-        WebElement passwordInput = driver.findElement(By.id("password"));
-        passwordInput.sendKeys(password);
-        WebElement submitButton = driver.findElement(By.id("btnSubmit"));
-        submitButton.click();
-        sleep(2000);
+        do {
+            sleep(15000);
+            try {
+                WebElement userInput = driver.findElement(By.id("username"));
+                userInput.sendKeys(username);
+                WebElement passwordInput = driver.findElement(By.id("password"));
+                passwordInput.sendKeys(password);
+                WebElement submitButton = driver.findElement(By.id("btnSubmit"));
+                submitButton.click();
+                sleep(2000);
+                loginflag = false;
+            } catch (Exception ex) {
+                loginflag = true;
+            }
+        }
+        while (loginflag);
 
         driver.get(access_link);
-        List<WebElement> elements = driver.findElement(By.className("listing")).findElements(By.tagName("tr"));
+
+        boolean accessFlag = true;
+
+        List<WebElement> elements = new ArrayList<WebElement>();
+        do {
+            sleep(5000);
+            try {
+                elements = driver.findElement(By.className("listing")).findElements(By.tagName("tr"));
+                accessFlag = false;
+            } catch (Exception ex) {
+                accessFlag = true;
+            }
+        }
+        while (accessFlag);
+
 
         int index = 0;
         List<String> links = new ArrayList<String>();
