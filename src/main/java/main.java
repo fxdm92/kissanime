@@ -36,9 +36,9 @@ public class main {
         if (!link_start.equals("")) LINK_START = Integer.valueOf(link_start);
 
         FirefoxProfile profile = new FirefoxProfile();
-        profile.setPreference("permissions.default.stylesheet", 2);
+/*        profile.setPreference("permissions.default.stylesheet", 2);
         profile.setPreference("permissions.default.image", 2);
-        profile.setPreference("dom.ipc.plugins.enabled.libflashplayer.so", "false");
+        profile.setPreference("dom.ipc.plugins.enabled.libflashplayer.so", "false");*/
 
         WebDriver driver = new FirefoxDriver(profile);
 
