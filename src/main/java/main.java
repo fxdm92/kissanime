@@ -19,9 +19,6 @@ public class main {
 
         int LINK_LIMITATION = 1000;
         int LINK_START = 0;
-        String loginLink = "http://kissanime.com/Login";
-        String username = "mrdl2010";
-        String password = "111111";
 
         Scanner scanner = new Scanner(System.in);
 
@@ -36,35 +33,31 @@ public class main {
         if (!link_start.equals("")) LINK_START = Integer.valueOf(link_start);
 
         FirefoxProfile profile = new FirefoxProfile();
-/*        profile.setPreference("permissions.default.stylesheet", 2);
+        profile.setPreference("permissions.default.stylesheet", 2);
         profile.setPreference("permissions.default.image", 2);
-        profile.setPreference("dom.ipc.plugins.enabled.libflashplayer.so", "false");*/
+        profile.setPreference("dom.ipc.plugins.enabled.libflashplayer.so", "false");
+        //profile.setPreference("toolkit.telemetry.prompted", 2);
+        profile.setPreference("toolkit.telemetry.rejected", true);
+        profile.setPreference("toolkit.telemetry.enabled", false);
+        profile.setPreference("datareporting.healthreport.service.enabled", false);
+        profile.setPreference("datareporting.healthreport.uploadEnabled", false);
+        profile.setPreference("datareporting.healthreport.service.firstRun", false);
+        profile.setPreference("datareporting.healthreport.logging.consoleEnabled", false);
+        profile.setPreference("datareporting.policy.dataSubmissionEnabled", false);
+        profile.setPreference("datareporting.policy.dataSubmissionPolicyResponseType", "accepted-info-bar-dismissed");
+        profile.setPreference("datareporting.policy.dataSubmissionPolicyAccepted", false);
 
         WebDriver driver = new FirefoxDriver(profile);
 
-        //Login
-        driver.get(loginLink);
-
-        boolean loginflag = true;
-
-        do {
-            sleep(15000);
-            try {
-                WebElement userInput = driver.findElement(By.id("username"));
-                userInput.sendKeys(username);
-                WebElement passwordInput = driver.findElement(By.id("password"));
-                passwordInput.sendKeys(password);
-                WebElement submitButton = driver.findElement(By.id("btnSubmit"));
-                submitButton.click();
-                sleep(2000);
-                loginflag = false;
-            } catch (Exception ex) {
-                loginflag = true;
-            }
-        }
-        while (loginflag);
+        login(driver);
 
         driver.get(access_link);
+
+        //if (!isLogined(driver))
+        //{
+        //login(driver);
+            driver.get(access_link);
+        //}
 
         boolean accessFlag = true;
 
@@ -131,5 +124,42 @@ public class main {
         } catch (Exception ex) {
 
         }
+    }
+
+    public static void login(WebDriver driver){
+        String loginLink = "http://kissanime.com/Login";
+        String username = "mrdl2010";
+        String password = "111111";
+
+        boolean loginflag = true;
+
+        driver.get(loginLink);
+        do {
+            sleep(5000);
+            try {
+                WebElement userInput = driver.findElement(By.id("username"));
+                userInput.sendKeys(username);
+                WebElement passwordInput = driver.findElement(By.id("password"));
+                passwordInput.sendKeys(password);
+                WebElement submitButton = driver.findElement(By.id("btnSubmit"));
+                submitButton.click();
+                sleep(2000);
+                loginflag = false;
+            } catch (Exception ex) {
+                loginflag = true;
+            }
+        }
+        while (loginflag);
+    }
+
+    public static boolean isLogined(WebDriver driver){
+        try {
+            WebElement e = driver.findElement(By.tagName("html"));
+            if (e.getText().toLowerCase().contains("mrdl2010")) return true;
+        }
+        catch (Exception ex){
+            return false;
+        }
+        return false;
     }
 }
