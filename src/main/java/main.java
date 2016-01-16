@@ -100,6 +100,7 @@ public class main {
                     driver.get(link);
                     WebElement element = driver.findElement(By.id("divDownload")).findElement(By.tagName("a"));
                     String t = element.getAttribute("href");
+                    sleep(1000);
                     System.out.println(t);
                     allLinks = allLinks + " " + t;
                 } catch (Exception error) {
